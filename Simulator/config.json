@@ -1,0 +1,76 @@
+{
+    "startTime": "13:00:00",
+    "timeStride": 60,
+    "outputFile": "../Aggregator/Data/simulatedsData.csv",
+    "APIs": [
+        {
+            "apiName": "API 1",
+            "actions": [
+                {
+                    "action": "increase",
+                    "amount": 100,
+                    "duration": 5,
+                    "minResTime": 1,
+                    "maxResTime": 5,
+                    "rateOfFailure": 0
+                },
+                {
+                    "action": "spike",
+                    "amount": 200,
+                    "duration": 2,
+                    "minResTime": 15,
+                    "maxResTime": 20,
+                    "rateOfFailure": 0.05
+                },
+                {
+                    "action": "increase",
+                    "amount": 600,
+                    "duration": 5,
+                    "minResTime": 20,
+                    "maxResTime": 250,
+                    "rateOfFailure": 0.3
+                },
+                {
+                    "action": "spike",
+                    "amount": 300,
+                    "duration": 2,
+                    "minResTime": 750,
+                    "maxResTime": 900,
+                    "rateOfFailure": 0.7
+                },
+                {
+                    "action": "increase",
+                    "amount": 150,
+                    "duration": 10,
+                    "minResTime": 900,
+                    "maxResTime": 1250,
+                    "rateOfFailure": 0.9
+                },
+                {
+                    "action": "drop",
+                    "amount": 700,
+                    "duration": 1,
+                    "minResTime": 200,
+                    "maxResTime": 600,
+                    "rateOfFailure": 0.66
+                },
+                {
+                    "action": "decrease",
+                    "amount": 300,
+                    "duration": 10,
+                    "minResTime": 20,
+                    "maxResTime": 200,
+                    "rateOfFailure": 0.3
+                },
+                {
+                    "action": "decrease",
+                    "amount": 350,
+                    "duration": 5,
+                    "minResTime": 1,
+                    "maxResTime": 20,
+                    "rateOfFailure": 0.05
+                }
+            ]
+        }
+    ]
+}
