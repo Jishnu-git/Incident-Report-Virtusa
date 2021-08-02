@@ -1,0 +1,5 @@
+{
+    "inputFile": "./Data/simulatedData.csv",
+    "outputFile": "../Model/Data/trainingData.csv",
+    "windowSize": 5
+}
