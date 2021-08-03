@@ -1,0 +1,7 @@
+{
+    "trainingFile": "./Data/trainingData.csv",
+    "testingFile": "./Data/trainingData.csv",
+    "model": "regression",
+    "predictedOutputFile": "./Predictions/predictedData.csv",
+    "modelOutputFile": "../DatabaseSinker/Data/modelParameters.json" 
+}
