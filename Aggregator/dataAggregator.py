@@ -47,4 +47,4 @@ if __name__ == "__main__":
         "Failure Rate": failPercent
     })
 
-    aggregatedData.to_csv(outputFile)
+    aggregatedData.to_csv(outputFile, index=False)
