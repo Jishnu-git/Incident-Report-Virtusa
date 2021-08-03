@@ -1,7 +1,7 @@
 {
     "startTime": "13:00:00",
     "timeStride": 60,
-    "outputFile": "../Aggregator/Data/simulatedsData.csv",
+    "outputFile": "../Aggregator/Data/simulatedData.csv",
     "APIs": [
         {
             "apiName": "API 1",
