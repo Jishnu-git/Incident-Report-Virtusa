@@ -1,5 +1,6 @@
 {
     "inputFile": "./Data/simulatedData.csv",
-    "outputFile": "../Model/Data/trainingData.csv",
+    "groupedOutputFile": "../Model/Data/groupedData.csv",
+    "aggregatedOutputFile": "../Model/Data/trainingData.csv",
     "windowSize": 5
 }

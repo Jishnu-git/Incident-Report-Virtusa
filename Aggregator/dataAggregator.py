@@ -9,17 +9,20 @@ if __name__ == "__main__":
 
     simulatedData = pd.read_csv(config["inputFile"])
     windowSize = config["windowSize"]
-    outputFile = config["outputFile"]
-    outputDir = os.path.dirname(outputFile)
-    if not os.path.exists(outputDir):
-        os.makedirs(outputDir)
+    groupedOutputFile = config["groupedOutputFile"]
+    aggregatedOutputFile = config["aggregatedOutputFile"]
+
+    for outputFile in [groupedOutputFile, aggregatedOutputFile]:
+        outputDir = os.path.dirname(outputFile)
+        if not os.path.exists(outputDir):
+            os.makedirs(outputDir)
 
     simulatedData.drop(["API route", "HTTP Code"], inplace=True, axis=1)
     simulatedData.Status = simulatedData.Status.map({"success": 0, "failure": 1})
     simulatedData["Requests"] = 1
     simulatedData.rename(columns={"Status": "Failure"}, inplace=True)
-    groupedData = simulatedData.groupby("Time").agg({"Response Time": "mean", "Failure": "sum", "Requests": "count"})
-    
+    groupedData = simulatedData.groupby("Time").agg({"Response Time": "mean", "Failure": "sum", "Requests": "count"}).reset_index()
+
     avgResTime = []
     minResTime = []
     maxResTime = []
@@ -27,8 +30,8 @@ if __name__ == "__main__":
     minReqs = []
     maxReqs = []
     failPercent = []
-    for i in range(0, groupedData.shape[0] - 5):
-        windowAgg = groupedData.iloc[i:(i + 5)].agg({"Response Time": ["mean", "min", "max"], "Failure": "sum", "Requests": ["sum", "min", "max", "mean"]})
+    for i in range(0, groupedData.shape[0] - windowSize):
+        windowAgg = groupedData.iloc[i:(i + windowSize)].agg({"Response Time": ["mean", "min", "max"], "Failure": "sum", "Requests": ["sum", "min", "max", "mean"]})
         avgResTime.append(windowAgg["Response Time"]["mean"])
         minResTime.append(windowAgg["Response Time"]["min"])
         maxResTime.append(windowAgg["Response Time"]["max"])
@@ -47,4 +50,8 @@ if __name__ == "__main__":
         "Failure Rate": failPercent
     })
 
-    aggregatedData.to_csv(outputFile, index=False)
+    failure = groupedData["Failure"] / groupedData["Requests"]
+    groupedData.drop("Failure", inplace=True, axis=1)
+    groupedData["Failure"] = failure
+    groupedData.to_csv(groupedOutputFile, index=False)
+    aggregatedData.to_csv(aggregatedOutputFile, index=False)
